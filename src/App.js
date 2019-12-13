@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import classes from './App.css';
+import './App.css';
 import Person from './Person/Person';
+//App.css
 
 
 
@@ -14,12 +15,13 @@ class App extends Component {
     otherState: 'some other value',
     showPersons: false
   };
+
   deletePersonHandler = (personIndex) => {
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons: persons})
-
   }
+
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
         return p.id === id;
@@ -32,11 +34,12 @@ class App extends Component {
     persons[personIndex] = person;
 
     this.setState( {persons: persons})
-}
-togglePersonsHandler = () => {
-  const doesShow = this.state.showPersons;
-  this.setState({showPersons: !doesShow})
-}
+  }
+
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow})
+  }
 render(){
   const style = {
     backgroundColor: 'green',
@@ -44,8 +47,14 @@ render(){
     font: 'inherit',
     border: '1px solid blue',
     padding: '8px',
-    curser: 'pointer',
-
+    curser: 'pointer'
+  };
+  const red = {
+    color: 'red',
+    background: 'green'
+  };
+  const bold = {
+    color: 'bold'
   };
 
   let persons = null;
@@ -53,37 +62,45 @@ render(){
   if (this.state.showPersons) {
     persons = (
       <div >
-      {this.state.persons.map((person, index) => {
-        return <Person
-        click={() => this.deletePersonHandler(index)}
-        name={person.name}
-        age={person.age}
-        key={person.id}
-        changed={(event) => this.nameChangeHandler(event, person.id)}/>
-      })}
+        {this.state.persons.map((person, index) => {
+          return <Person
+          click={() => this.deletePersonHandler(index)}
+          name={person.name}
+          age={person.age}
+          key={person.id}
+          changed={(event) => this.nameChangeHandler(event, person.id)}/>
+        })}
       </div>
     );
     style.backgroundColor = 'red';
 
   }
+
+
+  //What are you trying to change colors for here? You are pushing through something empty. 
   let assignedClasses = [];
+
   if (this.state.persons.length <= 2){
-    assignedClasses.push(classes.red);
+    //assignedClasses.push(classes.red);
+    assignedClasses.push(red)
   }
   if (this.state.persons.length <= 1){
-    assignedClasses.push(classes.bold);
+   // assignedClasses.push(classes.bold);
+    assignedClasses.push(bold)
   }
 
-
   return (
-
-    <div className={classes.App}>
+    <div className="App">
       <h1>Hi, I'm a react app</h1>
-      <p className={assignedClasses.join(' ')}> This is really working!</p>
+      <p> This is really working!</p>
       <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
-
       {persons}
-
+      <h1 className="red">
+        mkjkjkj
+      </h1> 
+      <p style={red}>
+        para
+      </p>
     </div>
 
   );
