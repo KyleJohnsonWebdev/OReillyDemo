@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-//App.css
-
-
 
 class App extends Component {
   state = {
@@ -13,7 +10,8 @@ class App extends Component {
       { id:'00dd', name: 'Stephanie', age: 27 }
     ],
     otherState: 'some other value',
-    showPersons: false
+    showPersons: false,
+    firstColor:false
   };
 
   deletePersonHandler = (personIndex) => {
@@ -40,6 +38,11 @@ class App extends Component {
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow})
   }
+
+  toggleColor = () => {
+    this.setState({firstColor:!this.state.firstColor});
+  };
+
 render(){
   const style = {
     backgroundColor: 'green',
@@ -89,6 +92,12 @@ render(){
     assignedClasses.push(bold)
   }
 
+
+  let boxClass = ["box"];
+  if(this.state.firstColor) {
+    boxClass.push('red');
+  }
+
   return (
     <div className="App">
       <h1>Hi, I'm a react app</h1>
@@ -101,9 +110,14 @@ render(){
       <p style={red}>
         para
       </p>
+
+      <button onClick={this.toggleColor}>First Color</button>
+      <div className={boxClass.join(' ')} onClick={this.toggleColor}>
+        {this.state.firstColor ? "Remove a class" : "Add a class"}
+      </div>     
+
     </div>
 
   );
-}
-}
+}}
 export default App;
